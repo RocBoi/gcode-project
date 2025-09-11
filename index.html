@@ -13,12 +13,6 @@
       font-family: 'Segoe UI', sans-serif;
       background: #000000; /* Solid black background */
       color: #ffffff;
-      <div class="popup-ad" id="popupAd">
-  <span class="close-btn" onclick="closePopup()">×</span>
-  <a href="https://www.redbubble.com/shop/ap/172231642?asc=u" target="_blank">
-    <img src="https://www.redbubble.com/shop/ap/172231642?asc=u" alt="Fan Merch Ad">
-  </a>
-</div>
     }
     header {
       background: linear-gradient(to right, rgba(30,60,114,0.85), rgba(42,82,152,0.85));
@@ -76,18 +70,47 @@
       border-radius: 5px;
       margin-top: 1rem;
     }
+    .stream-now:hover {
+      background-color: #0f5bb3;
+    }
+
+    /* Popup Ad Styling */
     .popup-ad {
       position: fixed;
-      bottom: 15px;
-      right: 15px;
-      width: 300px;
-      border: 3px solid #fff;
-      background: #fff;
-      z-index: 999;
+      bottom: 20px;
+      right: 20px;
+      width: 280px;
+      background: #111;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+      z-index: 9999;
+      animation: fadeInUp 0.6s ease;
+      display: none; /* hidden by default */
     }
     .popup-ad img {
       width: 100%;
       display: block;
+      border-radius: 15px 15px 0 0;
+    }
+    .popup-ad .close-btn {
+      position: absolute;
+      top: 5px;
+      right: 10px;
+      font-size: 20px;
+      color: #fff;
+      cursor: pointer;
+      z-index: 2;
+    }
+    @keyframes fadeInUp {
+      from {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
     }
   </style>
 </head>
@@ -130,22 +153,27 @@
     <p>Stay tuned for more singles, streaming exclusives, fan merch drops, and major press coverage on RocBoi’s rise from Atlanta to the global stage.</p>
   </section>
 
-  div class="popup-ad">
-    <a href="https://www.redbubble.com/shop/ap/172231642?asc=u" target="_blank">
-      <img src="https://www.redbubble.com/shop/ap/172231642?asc=u" alt="Fan Merch Ad">
+  <!-- Popup Ad -->
+  <div class="popup-ad" id="popupAd">
+    <span class="close-btn" onclick="closePopup()">×</span>
+    <a href="https://www.redbubble.com/i/iphone-case/COMING-SOON-FALL-25-by-GCodeMerch/172285674.4UP47" target="_blank">
+      <img src="https://ih1.redbubble.net/image.5188948870.8567/iphone_12_4.4u1.jpg" alt="COMING SOON Fall ‘25 Merch" />
     </a>
   </div>
+
   <script>
-  function closePopup() {
-    const ad = document.getElementById("popupAd");
-    ad.style.display = "none";
-    sessionStorage.setItem("popupClosed", "true");
-  }
+    function closePopup() {
+      document.getElementById("popupAd").style.display = "none";
+      sessionStorage.setItem("popupClosed", "true");
+    }
 
-  window.onload = () => {
-    if (sessionStorage
-
- 
+    window.onload = () => {
+      if (!sessionStorage.getItem("popupClosed")) {
+        setTimeout(() => {
+          document.getElementById("popupAd").style.display = "block";
+        }, 3000); // show after 3 seconds
+      }
+    };
   </script>
 
 </body>
